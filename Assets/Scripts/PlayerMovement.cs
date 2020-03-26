@@ -16,33 +16,43 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float cellStep = 50.0f;
 
+    bool isMoving = false;
+
     void Update()
     {
-        if(Input.GetKeyDown(moveForward))
+        // if player is not moving yet check if player has been asked to move based on WASD input from user
+        if(!isMoving)
         {
-            LookAtDirection(new Vector3(0.0f, 0.0f, 0.0f));
-            UpdatePlayerTarget(Vector3.forward);
-        }
-        if(Input.GetKeyDown(moveLeft))
-        {
-            LookAtDirection(new Vector3(0.0f, -90.0f, 0.0f));
-            UpdatePlayerTarget(Vector3.left);
+            if(Input.GetKeyDown(moveForward))
+            {
+                LookAtDirection(new Vector3(0.0f, 0.0f, 0.0f));
+                UpdatePlayerTarget(Vector3.forward);
+            }
+            if(Input.GetKeyDown(moveLeft))
+            {
+                LookAtDirection(new Vector3(0.0f, -90.0f, 0.0f));
+                UpdatePlayerTarget(Vector3.left);
 
-        }
-        if(Input.GetKeyDown(moveBackward))
-        {
-            LookAtDirection(new Vector3(0.0f, 180.0f, 0.0f));
-            UpdatePlayerTarget(Vector3.back);
+            }
+            if(Input.GetKeyDown(moveBackward))
+            {
+                LookAtDirection(new Vector3(0.0f, 180.0f, 0.0f));
+                UpdatePlayerTarget(Vector3.back);
 
-        }
-        if(Input.GetKeyDown(moveRight))
-        {
-            LookAtDirection(new Vector3(0.0f, 90.0f, 0.0f));
-            UpdatePlayerTarget(Vector3.right);
+            }
+            if(Input.GetKeyDown(moveRight))
+            {
+                LookAtDirection(new Vector3(0.0f, 90.0f, 0.0f));
+                UpdatePlayerTarget(Vector3.right);
+            }
         }
 
     }
 
+    /// <summary>
+    /// activate player movement 
+    /// </summary>
+    /// <param name="direction">direction to move in</param>
     private void UpdatePlayerTarget(Vector3 direction)
     {
         
@@ -51,9 +61,15 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(coroutine);
     }
 
+    /// <summary>
+    /// Player movement Coroutine to pause other activity while player moves
+    /// can be a normal function if we dont want to stop other activity
+    /// </summary>
+    /// <param name="targetDirection">direction to move in</param>
+    /// <returns>wait a sec after moving and then continue game</returns>
     IEnumerator MoveTowards(Vector3 targetDirection)
     {
-        // transform.Translate(direction * speed * cellStep * Time.deltaTime, Space.Self);
+        isMoving = true;
         // Move our position a step closer to the target.
         float step =  speed * Time.deltaTime; // calculate distance to move
         while(transform.position != targetDirection)
@@ -62,8 +78,13 @@ public class PlayerMovement : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, targetDirection, step);
         }
         yield return new WaitForSeconds(1.0f);
+        isMoving = false;
     } 
 
+    /// <summary>
+    /// Rotate player to look in the the direction it is moving
+    /// </summary>
+    /// <param name="direction">direction player is moving</param>
     private void LookAtDirection(Vector3 direction)
     {   
         body.localRotation = Quaternion.Euler(direction);

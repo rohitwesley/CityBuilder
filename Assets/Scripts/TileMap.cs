@@ -23,7 +23,7 @@ public class TileMap : MonoBehaviour
     /// </summary>
     public void InitilizeMap()
     {
-        // Initialise maze and status variables
+        // Initialise TileMap and status variables
         mapDimensions = new Vector2Int(6,6);
     }
     
@@ -87,7 +87,7 @@ public class TileMap : MonoBehaviour
             }
         }
 
-        // Draw Maze
+        // Draw TileMap
         for (int x = 0; x < mapDimensions.x; x++)
         {
             // Debug.Log("Drawing Maze Row" + x);

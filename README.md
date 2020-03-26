@@ -9,19 +9,26 @@ Small Exercise in unity.
 
 ## Inputs :
 * WASD - move player on TileMap
-* Left Mouse - Create Unit
+* Left Mouse - Create Unit at given point using a menu of agent types
 
 ## Features :
 * Tile Map 
 * Move Player on TileMap
 * Create, Select and View Status, Edit, Delete(CRUD) agents on TileMap
+* Agents move on tile map
+* Change time of day
 
 ## WIP :
+* Spawn pawns thah move from the house to the factory
+
+## TODO Prototype:
+* Reset the scene when pressing the reset button
+* Change time of Day with a slider
+
+## TODO Final:
 * Higlight Grid Tile when pointed at.
 * Select Grid Tile using "Menu 1" (Shows Radial UI Menu With Types Of Buildings).
 * Place Selected Building on Tile.
-
-## TODO:
 * Residential spawns Pawns that move to different buildings and then get Destroyed.
 * Select Reset using "Menu 2" (Shows Radial UI Menu with Reset,Day N Night Slider) to clear city.
 * Select Slider using "Menu 2" (Shows Radial UI Menu with Reset,Day N Night Slider) to change time of day in city. 

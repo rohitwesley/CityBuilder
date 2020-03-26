@@ -11,14 +11,12 @@ Small Exercise in unity.
 * TBD...
 
 ## Features :
-* Tile Map
+* Tile Map 
 
 ## WIP :
-* 
+* Higlight Grid Tile when pointed at.
 
 ## TODO:
-* Draw a Grid Tile Map Based on User Specific Size.
-* Higlight Grid Tile when pointed at.
 * Select Grid Tile using "Menu 1" (Shows Radial UI Menu With Types Of Buildings).
 * Place Selected Building on Tile.
 * Residential spawns Pawns that move to different buildings and then get Destroyed.

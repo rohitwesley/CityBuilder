@@ -10,11 +10,11 @@ public class TileMap : MonoBehaviour
     /// </summary>
     
     [Range(0.01f,10)]
-    [SerializeField] private float mapScale = 0.3f;
+    [SerializeField] private float mapCellScale = 1.0f;
     [Range(1,10)]
-    [SerializeField] private int pathWidth = 3;
+    [SerializeField] private int cellsPerPathWidth = 3;
     [Range(1,10)]
-    [SerializeField] private int wallWidth = 1;
+    [SerializeField] private int cellsPerWallWidth = 1;
     
     Vector2Int mapDimensions;
 
@@ -50,18 +50,18 @@ public class TileMap : MonoBehaviour
             Vector3 position = new Vector3(-mapDimensions.x/2 + x + 0.5f,
                                             0,
                                             -mapDimensions.y/2 - 1 + 0.5f);
-            position *= mapScale;
-            for (int px = 0; px < pathWidth+wallWidth; px++)
+            position *= mapCellScale;
+            for (int px = 0; px < cellsPerPathWidth+cellsPerWallWidth; px++)
             {
-                for (int py = 0; py < pathWidth+wallWidth; py++)
+                for (int py = 0; py < cellsPerPathWidth+cellsPerWallWidth; py++)
                 {                        
                     // Draw Wall tiles
-                    if(px%(wallWidth)==pathWidth || py%(pathWidth+wallWidth)==pathWidth)
+                    if(px%(cellsPerWallWidth)==cellsPerPathWidth || py%(cellsPerPathWidth+cellsPerWallWidth)==cellsPerPathWidth)
                     {
                         Vector3 pathPosition = new Vector3(px,0,py);    
-                        pathPosition *= mapScale;
-                        pathPosition = position*(pathWidth+wallWidth)+pathPosition;
-                        Gizmos.DrawWireCube(pathPosition, Vector3.one*mapScale);
+                        pathPosition *= mapCellScale;
+                        pathPosition = position*(cellsPerPathWidth+cellsPerWallWidth)+pathPosition;
+                        Gizmos.DrawWireCube(pathPosition, Vector3.one*mapCellScale);
                     }
                 }
             }
@@ -70,18 +70,18 @@ public class TileMap : MonoBehaviour
             position = new Vector3(-mapDimensions.x/2 - 1 + 0.5f,
                                             0,
                                             -mapDimensions.y/2 + x + 0.5f);
-            position *= mapScale;
-            for (int px = 0; px < pathWidth+wallWidth; px++)
+            position *= mapCellScale;
+            for (int px = 0; px < cellsPerPathWidth+cellsPerWallWidth; px++)
             {
-                for (int py = 0; py < pathWidth+wallWidth; py++)
+                for (int py = 0; py < cellsPerPathWidth+cellsPerWallWidth; py++)
                 {                        
                     // Draw Wall tiles
-                    if(px%(pathWidth+wallWidth)==pathWidth || py%(wallWidth)==pathWidth)
+                    if(px%(cellsPerPathWidth+cellsPerWallWidth)==cellsPerPathWidth || py%(cellsPerWallWidth)==cellsPerPathWidth)
                     {
                         Vector3 pathPosition = new Vector3(px,0,py);    
-                        pathPosition *= mapScale;
-                        pathPosition = position*(pathWidth+wallWidth)+pathPosition;
-                        Gizmos.DrawWireCube(pathPosition, Vector3.one*mapScale);
+                        pathPosition *= mapCellScale;
+                        pathPosition = position*(cellsPerPathWidth+cellsPerWallWidth)+pathPosition;
+                        Gizmos.DrawWireCube(pathPosition, Vector3.one*mapCellScale);
                     }
                 }
             }
@@ -96,16 +96,16 @@ public class TileMap : MonoBehaviour
                 Vector3 position = new Vector3(-mapDimensions.x/2 + x + 0.5f,
                                                 0,
                                                 -mapDimensions.y/2 + y + 0.5f);
-                position *= mapScale;
-                for (int px = 0; px < pathWidth+wallWidth; px++)
+                position *= mapCellScale;
+                for (int px = 0; px < cellsPerPathWidth+cellsPerWallWidth; px++)
                 {
-                    for (int py = 0; py < pathWidth+wallWidth; py++)
+                    for (int py = 0; py < cellsPerPathWidth+cellsPerWallWidth; py++)
                     {   
                         // Draw path tiles
                         Vector3 pathPosition = new Vector3(px,0,py);
-                        pathPosition *= mapScale;
-                        pathPosition = position*(pathWidth+wallWidth)+pathPosition;
-                        Gizmos.DrawWireCube(pathPosition, Vector3.one*mapScale);
+                        pathPosition *= mapCellScale;
+                        pathPosition = position*(cellsPerPathWidth+cellsPerWallWidth)+pathPosition;
+                        Gizmos.DrawWireCube(pathPosition, Vector3.one*mapCellScale);
                     }
                 }
 

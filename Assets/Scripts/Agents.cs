@@ -76,6 +76,25 @@ namespace GameLogic
                     return UnitType.Floor;
             }
         }
+
+        public string GetAgentName()
+        {
+            switch (unitType)
+            {
+                case UnitType.Floor: 
+                    return "Floor";
+                case UnitType.Home: 
+                    return "Home";
+                case UnitType.Player: 
+                    return "Player";
+                case UnitType.Factory: 
+                    return "Factory";
+                case UnitType.Pawns: 
+                    return "Pawns";
+                default:
+                    return "Floor";
+            }
+        }
     
     }
 

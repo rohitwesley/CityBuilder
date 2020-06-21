@@ -1,8 +1,13 @@
 # Game : CityBuilder
 Small Exercise in unity*
+<<<<<<< HEAD
 
 ## Git : [GitHub Link] (https://github*com/rohitwesley/CityBuilder*git)
+=======
+>>>>>>> master
 
+## Git : 
+[GitHub Link](https://github.com/rohitwesley/CityBuilder.git)
 ## OS Platform : Mac/Windows
 
 ## Unity : Unity 2019*2*8f1
@@ -16,7 +21,11 @@ Small Exercise in unity*
 * Move Player on TileMap
 * Create, Select and View Status, Edit, Delete(CRUD) agents on TileMap
 * Agents move on tile map
+<<<<<<< HEAD
 ⋅⋅* Pawn moves from one waypoint to the next in loop searching for new waypoint every nth sec  
+=======
+⋅⋅⋅* Pawn moves from one waypoint to the next in loop searching for new waypoint every nth sec  
+>>>>>>> master
 * Change time of day
 
 ## WIP :

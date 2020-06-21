@@ -7,11 +7,6 @@ using UnityEngine.AI;
 
 public class AgentAI : MonoBehaviour
 {
-    enum DestinationType 
-    {
-        ClosestDestination,
-        RandomDestination,
-    }
     [SerializeField] private NavMeshAgent movementAgent;
     [SerializeField] private List<UnitType> destinationTypes;
     [SerializeField] private float RateOfTargetSearchInSec = 1;
@@ -19,12 +14,13 @@ public class AgentAI : MonoBehaviour
     [SerializeField] private float destinationSphereVolumeRadious = 0.5f;
     [SerializeField] private TextMeshProUGUI textStatus;
     [SerializeField] private string status = "Disabled";
-    // [SerializeField] private DestinationType destinationType = DestinationType.RandomDestination;
+    [SerializeField] private bool isDrawDebugger = true;
 
     List<GameObject> destinationTransform;
     int destPointIndex = 0;
     bool destinationFound = false;
     string destinationName = "";
+    bool isSearching = false;
 
     private void Start()
     {
@@ -47,10 +43,12 @@ public class AgentAI : MonoBehaviour
             // execute block of code here
             // if no destination start searching for new target destination
             SearchForTarget(RateOfTargetSearchInSec);
+            isSearching = true;
         }
         else
         {
             // wait for periodTempo sec till next beat
+            isSearching = false;
         }
 
         status = " ";
@@ -63,7 +61,7 @@ public class AgentAI : MonoBehaviour
 
     private void SearchForTarget(float sec)
     {
-        Debug.Log("Agent Searching");
+        // Debug.Log("Agent Searching");
         Vector3 searchCenter = transform.position;
         destinationTransform.Clear();
         destinationFound = false;
@@ -109,12 +107,36 @@ public class AgentAI : MonoBehaviour
         status = " I am moving to " + destinationTransform[destPointIndex].GetComponent<Agents>().GetAgentName();
 
         // Set the agent to go to the currently selected destination.
-        movementAgent.destination = destinationTransform[destPointIndex].transform.position;
+        movementAgent.SetDestination(destinationTransform[destPointIndex].transform.position);
 
         // Choose the next point in the array as the destination,
         // cycling to the start if necessary.
         destPointIndex = (destPointIndex + 1) % destinationTransform.Count;
  
+    }
+
+    /// <summary>
+    /// Draw AI search Debuger 
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        if(isDrawDebugger)
+        {
+            // Draw Search Sphere when searching and for a sec after searching
+            if (Time.time > nextBeatTime + 1.0 ) 
+            {
+                Gizmos.color = Color.blue;
+                Vector3 searchCenter = transform.position;
+                Gizmos.DrawWireSphere(searchCenter, searchRange);
+            }
+            if(destinationFound)
+            {
+                Gizmos.color = Color.yellow;
+                Vector3 targetCenter = destinationTransform[destPointIndex].transform.position;
+                Gizmos.DrawWireSphere(targetCenter, 0.25f);
+            }
+
+        }
     }
 
 }

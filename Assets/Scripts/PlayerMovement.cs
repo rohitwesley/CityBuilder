@@ -57,8 +57,8 @@ public class PlayerMovement : MonoBehaviour
     {
         
         Vector3 targetDirection = transform.position + (direction * cellStep);
-        IEnumerator coroutine = MoveTowards(targetDirection);
-        StartCoroutine(coroutine);
+        IEnumerator moveing = MoveTowards(targetDirection);
+        StartCoroutine(moveing);
     }
 
     /// <summary>
@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(0.001f);
             transform.position = Vector3.MoveTowards(transform.position, targetDirection, step);
         }
-        yield return new WaitForSeconds(1.0f);
+        // yield return new WaitForSeconds(0.01f);
         isMoving = false;
     } 
 
